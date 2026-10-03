@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import TransportCostCalculator from "./pages/TransportCostCalculator";
+import UnitConverter from "./pages/UnitConverter";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             path="/transport-calculator"
             element={<TransportCostCalculator />}
           />
+          <Route path="/unit-converter" element={<UnitConverter />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
