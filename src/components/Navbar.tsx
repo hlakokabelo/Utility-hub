@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -12,41 +12,6 @@ function Navbar() {
 
           <span>Utility Hub</span>
         </Link>
-
-        <div className="flex items-center gap-6">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "font-medium text-gray-900"
-                : "text-gray-500 hover:text-gray-900"
-            }
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/transport-calculator"
-            className={({ isActive }) =>
-              isActive
-                ? "font-medium text-gray-900"
-                : "text-gray-500 hover:text-gray-900"
-            }
-          >
-            Transport
-          </NavLink>
-
-          <NavLink
-            to="/unit-converter"
-            className={({ isActive }) =>
-              isActive
-                ? "font-medium text-gray-900"
-                : "text-gray-500 hover:text-gray-900"
-            }
-          >
-            Converter
-          </NavLink>
-        </div>
       </div>
     </nav>
   );
