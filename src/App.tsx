@@ -1,10 +1,28 @@
-import TransportCostCalculator from "./components/TransportCostCalculator";
+import { Route, Routes } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import TransportCostCalculator from "./pages/TransportCostCalculator";
 
 function App() {
   return (
-    <main className="h-screen w-screen bg-gray-100 flex items-center justify-center p-6">
-      <TransportCostCalculator />
-    </main>
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
+
+      <main className="min-h-[calc(100vh-73px)] flex items-center justify-center p-6">
+        <Routes>
+          <Route path="/" element={<Home />} />
+
+          <Route
+            path="/transport-calculator"
+            element={<TransportCostCalculator />}
+          />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
