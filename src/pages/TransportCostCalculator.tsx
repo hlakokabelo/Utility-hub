@@ -4,8 +4,8 @@ import { months, weekDays } from "../utils/transportCost";
 function TransportCostCalculator() {
   const now = new Date();
 
-  const [cost, setCost] = useState<number>(0);
-  const [selectedDays, setSelectedDays] = useState<number[]>([]);
+  const [cost, setCost] = useState<number>(25.5);
+  const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5]);
   const [fromToday, setFromToday] = useState<boolean>(false);
 
   const [selectMonth, setSelectMonth] = useState<boolean>(false);
@@ -50,6 +50,14 @@ function TransportCostCalculator() {
     selectedDays,
   );
 
+  const handleSelectAllDays = () => {
+    if (selectedDays.length === weekDays.length) {
+      setSelectedDays([]);
+    } else {
+      setSelectedDays(weekDays.map((day) => day.value));
+    }
+  };
+
   const totalCost = cost * numDays;
 
   return (
@@ -93,6 +101,16 @@ function TransportCostCalculator() {
               />
             </label>
           ))}
+
+          <label className="flex ml-10 flex-col items-center gap-1 cursor-pointer">
+            <span>All</span>
+
+            <input
+              type="checkbox"
+              checked={selectedDays.length === weekDays.length}
+              onChange={handleSelectAllDays}
+            />
+          </label>
         </div>
       </div>
 
