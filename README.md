@@ -1,75 +1,80 @@
-# React + TypeScript + Vite
+# Utility Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Utility Hub is a collection of simple, practical tools built with React and TypeScript.
 
-Currently, two official plugins are available:
+The project is designed as a central place for calculators and converters, with each tool available through its own route.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Current Tools
 
-## React Compiler
+### Transport Cost Calculator
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Calculate your estimated monthly transport cost based on:
 
-## Expanding the ESLint configuration
+- Cost per day
+- Selected work days
+- Number of work days in the selected month
+- Option to calculate from the current day
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The calculator determines the actual number of matching weekdays in the month instead of assuming a fixed number of weeks.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Planned Tools
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Unit Converter
+- Additional calculators and utility tools
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Tech Stack
 
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+
+## Features
+
+- Responsive interface
+- Client-side routing
+- Reusable components
+- Dynamic weekday calculations
+- Month selection
+- "From today" calculations
+- 404 page
+- Modular structure for adding new tools
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone <your-repository-url>
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
 ```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## Project Structure
+
+```text
+src/
+├── components/
+├── pages/
+├── App.tsx
+└── main.tsx
+```
+
+Pages represent individual tools and routes, while reusable interface elements are kept inside the components directory.
+
+## Purpose
+
+I built this project to practise building a modular React and TypeScript application while creating small tools that are genuinely useful.
+
+The goal is to keep expanding Utility Hub with more calculators and converters over time.
