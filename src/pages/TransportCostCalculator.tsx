@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { months, weekDays } from "../utils/transportCost";
 
 function TransportCostCalculator() {
   const now = new Date();
 
-  const [cost, setCost] = useState<number>(25.5);
+  const [cost, setCost] = useState<string>("25.5");
   const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5]);
   const [fromToday, setFromToday] = useState<boolean>(false);
 
@@ -58,7 +58,19 @@ function TransportCostCalculator() {
     }
   };
 
-  const totalCost = cost * numDays;
+  const handleCost = (e: ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    if (value.length >= 1 && value.startsWith("0") && !value.startsWith("0.")) {
+      value = value.replace(/^0+/, "");
+    } else if (value === "") {
+      return setCost("0");
+    }
+
+    setCost(value);
+  };
+
+  const totalCost = parseFloat(cost) * numDays;
 
   return (
     <div className="w-full max-w-lg bg-white rounded-xl shadow-md p-6">
@@ -78,7 +90,7 @@ function TransportCostCalculator() {
           min="0"
           step="0.01"
           value={cost}
-          onChange={(e) => setCost(Number(e.target.value))}
+          onChange={handleCost}
           className="w-full border border-gray-300 rounded-md px-3 py-2"
         />
       </div>
