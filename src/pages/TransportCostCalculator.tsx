@@ -5,10 +5,12 @@ function TransportCostCalculator() {
   const now = new Date();
 
   const [cost, setCost] = useState<string>("25.5");
+  const [salary, setSalary] = useState<string>("50");
   const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5]);
   const [fromToday, setFromToday] = useState<boolean>(false);
 
   const [selectMonth, setSelectMonth] = useState<boolean>(false);
+  const [selectSalary, setSelectSalary] = useState<boolean>(false);
   const [selectedMonth, setSelectedMonth] = useState<number>(
     now.getMonth() + 1,
   );
@@ -58,16 +60,19 @@ function TransportCostCalculator() {
     }
   };
 
-  const handleCost = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCost = (
+    e: ChangeEvent<HTMLInputElement>,
+    setValue: (value: React.SetStateAction<string>) => void,
+  ) => {
     let value = e.target.value;
 
     if (value.length >= 1 && value.startsWith("0") && !value.startsWith("0.")) {
       value = value.replace(/^0+/, "");
     } else if (value === "") {
-      return setCost("0");
+      return setValue("0");
     }
 
-    setCost(value);
+    setValue(value);
   };
 
   const totalCost = parseFloat(cost) * numDays;
@@ -90,7 +95,7 @@ function TransportCostCalculator() {
           min="0"
           step="0.01"
           value={cost}
-          onChange={handleCost}
+          onChange={(e) => handleCost(e, setCost)}
           className="w-full border border-gray-300 rounded-md px-3 py-2"
         />
       </div>
@@ -146,8 +151,29 @@ function TransportCostCalculator() {
 
           <span>Select month</span>
         </label>
+
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={selectSalary}
+            onChange={(e) => setSelectSalary(e.target.checked)}
+          />
+
+          <span>Salary</span>
+        </label>
       </div>
 
+      {selectSalary && (
+        <input
+          type="number"
+          id="cost"
+          min="0"
+          step="0.01"
+          value={salary}
+          onChange={(e) => handleCost(e, setSalary)}
+          className="w-full border border-gray-300 rounded-md px-3 py-2"
+        />
+      )}
       {selectMonth && (
         <div className="mb-6">
           <label
@@ -180,6 +206,11 @@ function TransportCostCalculator() {
         <p className="text-xl font-bold mt-2">
           Total Cost: R{totalCost.toFixed(2)}
         </p>
+        {selectSalary && (
+          <p className="text-xl font-bold mt-2">
+            Remaining: R{(Number(salary) - totalCost).toFixed(2)}
+          </p>
+        )}
       </div>
     </div>
   );
